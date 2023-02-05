@@ -5,10 +5,9 @@ import ticketRepository from "@/repositories/ticket-repository";
 
 
 async function getAllHotels(userId: number) {
-
+    console.log("TO AKI")
     const enrollmentTicket = await enrollmentRepository.findTicket(userId);
-    console.log(enrollmentTicket)
- 
+    console.log(enrollmentTicket,"TICKET")
     if (!enrollmentTicket) throw notFoundError();
 
     if (enrollmentTicket.Ticket.length === 0) throw notFoundError();

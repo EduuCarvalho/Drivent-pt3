@@ -11,7 +11,17 @@ export async function getAllHotels(req: AuthenticatedRequest, res: Response) {
 
         return res.status(httpStatus.OK).send(hotels)
     } catch (err) {
-        return res.sendStatus(httpStatus.NO_CONTENT);
+        if (err.name === "NotFoundError") {
+            return res.status(httpStatus.NOT_FOUND).send(err.message);
+          }
+      
+          if (err.name === "UnauthorizedError") {
+            return res.status(httpStatus.UNAUTHORIZED).send(err.message);
+          }
+      
+          if (err.name === "PaymentError") {
+            return res.status(httpStatus.PAYMENT_REQUIRED).send(err.message);
+          }
     }
 }
 
