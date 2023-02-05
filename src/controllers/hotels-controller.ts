@@ -4,9 +4,10 @@ import httpStatus from "http-status";
 import hotelsService from "@/services/hotes.service";
 
 export async function getAllHotels(req: AuthenticatedRequest, res: Response) {
+    const { userId } = req;
 
     try {
-        const hotels = await hotelsService.getAllHotels();
+        const hotels = await hotelsService.getAllHotels(userId);
 
         return res.status(httpStatus.OK).send(hotels)
     } catch (err) {
