@@ -5,9 +5,9 @@ import ticketRepository from "@/repositories/ticket-repository";
 
 
 async function getAllHotels(userId: number) {
-    console.log("TO AKI")
+ 
     const enrollmentTicket = await enrollmentRepository.findTicket(userId);
-    console.log(enrollmentTicket,"TICKET")
+   
     if (!enrollmentTicket) throw notFoundError();
 
     if (enrollmentTicket.Ticket.length === 0) throw notFoundError();
@@ -23,10 +23,8 @@ async function getAllHotels(userId: number) {
 
     const hotels = await hotelRepository.findHotels();
 
-    if (!hotels) {
-        throw notFoundError();
-    }
-    console.log ("TO AKI")
+    if (hotels.length === 0) throw notFoundError();
+    
     return hotels;
 }
 
@@ -49,6 +47,8 @@ async function getHotelByID(hotelId: number, userId: number) {
     if (!checkTciektType.TicketType.includesHotel) throw { name: "PaymentError", message: "Finish the payment before" };
 
     const hotels = hotelRepository.findHotelById(hotelId);
+
+    if (!hotels) throw notFoundError();
 
     return hotels;
 }
