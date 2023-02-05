@@ -11,8 +11,15 @@ async function getAllHotels() {
     return hotels;
 }
 
+async function getHotelByID(hotelId: number, userId: number) {
+    const hotels = hotelRepository.findHotelById(hotelId);
+
+    return hotels;
+}
+
 const hotelsService = {
-    getAllHotels
+    getAllHotels,
+    getHotelByID
 };
 
 export default hotelsService;
