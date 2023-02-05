@@ -30,12 +30,12 @@ async function upsert(
   });
 }
 
-async function findTicket(userId: number){
+async function findTicket(userId: number) {
   return prisma.enrollment.findFirst({
     where: { userId },
     include: { Ticket: true },
-  })
-};
+  });
+}
 
 export type CreateEnrollmentParams = Omit<Enrollment, "id" | "createdAt" | "updatedAt">;
 export type UpdateEnrollmentParams = Omit<CreateEnrollmentParams, "userId">;
